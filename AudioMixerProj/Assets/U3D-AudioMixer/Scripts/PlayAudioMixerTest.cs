@@ -6,6 +6,7 @@ public class PlayAudioMixerTest : MonoBehaviour
 	public AudioClip audioToPlay;
 	public KeyCode keyToPress;
 	public int channelToPlay;
+	public AudioMixerChannelTypes typeOfAudio;
 	public Material matDefault;
 	public Material matPressed;
 	

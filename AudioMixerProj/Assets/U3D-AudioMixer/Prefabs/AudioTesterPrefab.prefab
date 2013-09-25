@@ -81,6 +81,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: 051fb3f963ff64bb089814bb95d713b4, type: 3}
   keyToPress: 113
   channelToPlay: 1
+  typeOfAudio: 2
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
 --- !u!1001 &100100000
