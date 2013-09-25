@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: 23ff23da5021b434cba2bf8c4618e76c
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - audioMixerPrefab: {fileID: 100000, guid: b23eeaacc653a428f81534e508a89425, type: 2}
   executionOrder: 0
   icon: {fileID: -1500306622, guid: 0000000000000000d000000000000000, type: 0}
   userData: 

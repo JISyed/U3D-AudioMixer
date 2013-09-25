@@ -16,13 +16,11 @@ public class AudioMixer : MonoBehaviour
 	private AudioSource[] channels;
 	private bool[] channelsOccupied;
 	private static AudioMixer theInstance;
+	private static bool instanceFound = false;
 	
 	// Initilizer
 	void Start () 
 	{
-		// Assign the instance
-		theInstance = this;
-		
 		// Create the audio channels
 		channels = new AudioSource[NUM_OF_CHANNELS];
 		channelsOccupied = new bool[NUM_OF_CHANNELS];
@@ -37,7 +35,10 @@ public class AudioMixer : MonoBehaviour
 	// Update loop
 	void Update () 
 	{
-		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			
+		}
 	}
 	
 	// Used only to get a Gizmo icon in the editor
@@ -48,6 +49,7 @@ public class AudioMixer : MonoBehaviour
 	{
 		// Unassign the instance
 		theInstance = null;
+		instanceFound = false;
 		
 		// Destroy the channels
 		for(int i=0; i<NUM_OF_CHANNELS; i++)
@@ -74,31 +76,74 @@ public class AudioMixer : MonoBehaviour
 		return true;
 	}
 	
+	// Used to find the AudioMixerObject
+	private static void FindAMObject()
+	{
+		GameObject foundMixerObject = null;
+		
+		if(!instanceFound)
+		{
+			Debug.Log("Finding Mixer");
+			foundMixerObject = GameObject.Find("AudioMixerObject");
+			if(foundMixerObject == null)
+			{
+				Debug.Log("Mixer not found. Making one.");
+				// Change this path if you move AudioMixerObject.prefab somewhere else.
+				foundMixerObject = Resources.Load("/U3D-AudioMixer/Prefabs/AudioMixerObject") as GameObject;
+			}
+			else
+			{
+				Debug.Log("Mixer Found!");
+			}
+			AudioMixer mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
+			AudioMixer.theInstance = mixerComponent;
+			instanceFound = true;
+		}
+		else
+		{
+			Debug.Log("Mixer already found");
+		}
+	}
+	
 	// ------- Audio calls ------------
 	
 	public static void Play(AudioClip soundClip)
 	{
+		FindAMObject();
 		// WIP
 	}
 	
 	public static void Play(AudioClip soundClip, bool willLoop)
 	{
+		FindAMObject();
 		// WIP
 	}
 	
 	public static void PlayInChannel(AudioClip soundClip, int channel)
 	{
+		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel))
 		{
 			return;
 		}
+		
+		theInstance.channels[channel-1].clip = soundClip;
+		theInstance.channelsOccupied[channel-1] = true;
+		theInstance.channels[channel-1].Play();
 	}
 	
 	public static void PlayInChannel(AudioClip soundClip, int channel, bool willLoop)
 	{
+		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel))
 		{
 			return;
 		}
+		
+		theInstance.channels[channel-1].loop = willLoop;
+		
+		theInstance.channels[channel-1].clip = soundClip;
+		theInstance.channelsOccupied[channel-1] = true;
+		theInstance.channels[channel-1].Play();
 	}
 }
