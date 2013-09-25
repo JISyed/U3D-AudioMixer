@@ -80,6 +80,7 @@ public class AudioMixer : MonoBehaviour
 	private static void FindAMObject()
 	{
 		GameObject foundMixerObject = null;
+		AudioMixer mixerComponent = null;
 		
 		if(!instanceFound)
 		{
@@ -89,13 +90,18 @@ public class AudioMixer : MonoBehaviour
 			{
 				Debug.Log("Mixer not found. Making one.");
 				// Change this path if you move AudioMixerObject.prefab somewhere else.
-				foundMixerObject = Resources.Load("/U3D-AudioMixer/Prefabs/AudioMixerObject") as GameObject;
+				foundMixerObject = Instantiate( Resources.Load("AudioMixerObject") ) as GameObject;
+				mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
+				if(mixerComponent.enabled)
+				{
+					Debug.Log("Mixer creation successful.");
+				}
 			}
 			else
 			{
 				Debug.Log("Mixer Found!");
 			}
-			AudioMixer mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
+			mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
 			AudioMixer.theInstance = mixerComponent;
 			instanceFound = true;
 		}
