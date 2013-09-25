@@ -92,6 +92,7 @@ public class AudioMixer : MonoBehaviour
 				// Change this path if you move AudioMixerObject.prefab somewhere else.
 				foundMixerObject = Instantiate( Resources.Load("AudioMixerObject") ) as GameObject;
 				mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
+				mixerComponent.Start();
 				if(mixerComponent.enabled)
 				{
 					Debug.Log("Mixer creation successful.");
