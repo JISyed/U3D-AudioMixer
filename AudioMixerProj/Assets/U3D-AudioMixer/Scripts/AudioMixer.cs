@@ -1,20 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum AudioMixerChannelTypes
+{
+	Music,
+	Jingle,
+	Sound,
+	Voice
+}
+
 public class AudioMixer : MonoBehaviour 
 {
-	public enum ChannelTypes
-	{
-		Music,
-		Jingle,
-		Sound,
-		Voice
-	}
-	
 	public const int NUM_OF_CHANNELS = 8;
 	
 	private AudioSource[] channels;
 	private bool[] channelsOccupied;
+	private bool[] channelsPaused;
+	private AudioMixerChannelTypes[] channelsAudioType;
 	private static AudioMixer theInstance;
 	private static bool instanceFound = false;
 	
@@ -24,11 +26,15 @@ public class AudioMixer : MonoBehaviour
 		// Create the audio channels
 		channels = new AudioSource[NUM_OF_CHANNELS];
 		channelsOccupied = new bool[NUM_OF_CHANNELS];
+		channelsPaused = new bool[NUM_OF_CHANNELS];
+		channelsAudioType = new AudioMixerChannelTypes[NUM_OF_CHANNELS];
 		for(int i=0; i<NUM_OF_CHANNELS; i++)
 		{
 			channels[i] = gameObject.AddComponent<AudioSource>();
 			channels[i].playOnAwake = false;
 			channelsOccupied[i] = false;
+			channelsPaused[i] = false;
+			channelsAudioType[i] = AudioMixerChannelTypes.Sound;
 		}
 	}
 	
@@ -37,7 +43,11 @@ public class AudioMixer : MonoBehaviour
 	{
 		for(int i=0; i<NUM_OF_CHANNELS; i++)
 		{
-			
+			// Mark a channel as avaliavble if a sound isn't playing and not paused
+			if(!channels[i].isPlaying && !channelsPaused[i])
+			{
+				channelsOccupied[i] = false;
+			}
 		}
 	}
 	
@@ -84,23 +94,20 @@ public class AudioMixer : MonoBehaviour
 		
 		if(!instanceFound)
 		{
-			Debug.Log("Finding Mixer");
+			//Debug.Log("Finding Mixer");
 			foundMixerObject = GameObject.Find("AudioMixerObject");
 			if(foundMixerObject == null)
 			{
-				Debug.Log("Mixer not found. Making one.");
+				//Debug.Log("Mixer not found. Making one.");
 				// Change this path if you move AudioMixerObject.prefab somewhere else.
+				// AudioMixerObject.prefab must be in a folder called "Resources" or this won't work.
 				foundMixerObject = Instantiate( Resources.Load("AudioMixerObject") ) as GameObject;
 				mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
 				mixerComponent.Start();
-				if(mixerComponent.enabled)
-				{
-					Debug.Log("Mixer creation successful.");
-				}
 			}
 			else
 			{
-				Debug.Log("Mixer Found!");
+				//Debug.Log("Mixer Found!");
 			}
 			mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
 			AudioMixer.theInstance = mixerComponent;
@@ -108,8 +115,48 @@ public class AudioMixer : MonoBehaviour
 		}
 		else
 		{
-			Debug.Log("Mixer already found");
+			//Debug.Log("Mixer already found");
 		}
+	}
+	
+	// Finds the first avaliable channel with a linear scan of channels[]
+	// Returns a channel in the user's notation (1-8) not programmer's (0-7)
+	private static int FindFirstAvaliableChannel()
+	{
+		int avaliableChannel = -1;
+		bool channelFound = false;
+		
+		// Find an empty channel to play
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(!theInstance.channelsOccupied[i])
+			{
+				avaliableChannel = i;
+				channelFound = true;
+				break;
+			}
+		}
+		
+		// Couldn't find an empty channel, find the lowest priority channel
+		if(!channelFound)
+		{
+			int[] channelPriorities = new int[NUM_OF_CHANNELS];
+			int lowestPriority = 0;	// Hint: 0 is highest priority in Unity.
+			int channelWithTheLowestPriority = -1;
+			
+			for(int j=0; j<NUM_OF_CHANNELS; j++)
+			{
+				channelPriorities[j] = theInstance.channels[j].priority;
+				if(channelPriorities[j] > lowestPriority)
+				{
+					lowestPriority = channelPriorities[j];
+					channelWithTheLowestPriority = j;
+				}
+			}
+			avaliableChannel = channelWithTheLowestPriority;
+		}
+		
+		return avaliableChannel + 1; 	// User index notation, not programmer's
 	}
 	
 	// ------- Audio calls ------------
@@ -117,13 +164,17 @@ public class AudioMixer : MonoBehaviour
 	public static void Play(AudioClip soundClip)
 	{
 		FindAMObject();
-		// WIP
+		
+		//int avaliableChannel = FindFirstAvaliableChannel();
+		
+		
 	}
 	
 	public static void Play(AudioClip soundClip, bool willLoop)
 	{
 		FindAMObject();
-		// WIP
+		
+		
 	}
 	
 	public static void PlayInChannel(AudioClip soundClip, int channel)
@@ -136,6 +187,7 @@ public class AudioMixer : MonoBehaviour
 		
 		theInstance.channels[channel-1].clip = soundClip;
 		theInstance.channelsOccupied[channel-1] = true;
+		theInstance.channelsPaused[channel-1] = false;
 		theInstance.channels[channel-1].Play();
 	}
 	
@@ -149,8 +201,6 @@ public class AudioMixer : MonoBehaviour
 		
 		theInstance.channels[channel-1].loop = willLoop;
 		
-		theInstance.channels[channel-1].clip = soundClip;
-		theInstance.channelsOccupied[channel-1] = true;
-		theInstance.channels[channel-1].Play();
+		PlayInChannel(soundClip, channel);
 	}
 }
