@@ -21,7 +21,7 @@ public class PlayAudioMixerTest : MonoBehaviour
 	{
 		if(Input.GetKeyDown(keyToPress))	
 		{
-			AudioMixer.PlayInChannel(audioToPlay, 1, false);
+			AudioMixer.Play(audioToPlay, 1, AudioMixerChannelTypes.Sound, false, 1.0f, 1.0f, 128);
 			renderer.material = matPressed;
 		}
 		

@@ -161,46 +161,25 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
-	public static void Play(AudioClip soundClip)
-	{
-		FindAMObject();
-		
-		//int avaliableChannel = FindFirstAvaliableChannel();
-		
-		
-	}
-	
-	public static void Play(AudioClip soundClip, bool willLoop)
-	{
-		FindAMObject();
-		
-		
-	}
-	
-	public static void PlayInChannel(AudioClip soundClip, int channel)
+	public static void Play(AudioClip soundClip, int channel, AudioMixerChannelTypes audioType, bool loop, float volume, float pitch, int priority)
 	{
 		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel))
 		{
 			return;
 		}
+		
+		theInstance.channels[channel-1].priority = priority;
+		
+		theInstance.channels[channel-1].pitch = pitch;
+		
+		theInstance.channels[channel-1].volume = volume;
+		
+		theInstance.channels[channel-1].loop = loop;
 		
 		theInstance.channels[channel-1].clip = soundClip;
 		theInstance.channelsOccupied[channel-1] = true;
 		theInstance.channelsPaused[channel-1] = false;
 		theInstance.channels[channel-1].Play();
-	}
-	
-	public static void PlayInChannel(AudioClip soundClip, int channel, bool willLoop)
-	{
-		FindAMObject();
-		if(! theInstance.ChannelIsValid(channel))
-		{
-			return;
-		}
-		
-		theInstance.channels[channel-1].loop = willLoop;
-		
-		PlayInChannel(soundClip, channel);
 	}
 }
