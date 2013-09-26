@@ -7,6 +7,11 @@ public class PlayAudioMixerTest : MonoBehaviour
 	public KeyCode keyToPress;
 	public int channelToPlay;
 	public AudioMixerChannelTypes typeOfAudio;
+	public bool loopChannel = false;
+	public float channelPan = 0.0f;
+	public float channelPitch = 1.0f;
+	public int channelPriority = 128;
+	public float channelVolume = 1.0f;
 	public Material matDefault;
 	public Material matPressed;
 	
@@ -14,14 +19,24 @@ public class PlayAudioMixerTest : MonoBehaviour
 	void Start () 
 	{
 		renderer.material = matDefault;
+		
+		AudioMixer.ShouldChannelIgnorePause(channelToPlay, false);
+		AudioMixer.ShouldChannelIgnoreVolume(channelToPlay, false);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(Input.GetKeyDown(keyToPress))	
+		// These calls are here for convenient testing of the demo live
+		AudioMixer.SetChannelLooping(channelToPlay, loopChannel);
+		AudioMixer.SetChannelPan2D(channelToPlay, channelPan);
+		AudioMixer.SetChannelPitch(channelToPlay, channelPitch);
+		AudioMixer.SetChannelPriority(channelToPlay, channelPriority);
+		AudioMixer.SetChannelVolume(channelToPlay, channelVolume);
+		
+		if(Input.GetKeyDown(keyToPress))
 		{
-			AudioMixer.Play(audioToPlay, AudioMixerChannelTypes.Sound, 1);
+			AudioMixer.Play(1, audioToPlay, AudioMixerChannelTypes.Sound);
 			renderer.material = matPressed;
 		}
 		
