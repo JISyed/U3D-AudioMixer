@@ -161,25 +161,126 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
-	public static void Play(AudioClip soundClip, int channel, AudioMixerChannelTypes audioType, bool loop, float volume, float pitch, int priority)
+	public static void Play(AudioClip soundClip, AudioMixerChannelTypes audioType, int channel)
 	{
 		FindAMObject();
-		if(! theInstance.ChannelIsValid(channel))
-		{
-			return;
-		}
+		if(! theInstance.ChannelIsValid(channel) ) return;
 		
-		theInstance.channels[channel-1].priority = priority;
+		//theInstance.channels[channel-1].priority = priority;
 		
-		theInstance.channels[channel-1].pitch = pitch;
+		//theInstance.channels[channel-1].pitch = pitch;
 		
-		theInstance.channels[channel-1].volume = volume;
+		//theInstance.channels[channel-1].volume = volume;
 		
-		theInstance.channels[channel-1].loop = loop;
+		//theInstance.channels[channel-1].loop = loop;
 		
 		theInstance.channels[channel-1].clip = soundClip;
+		theInstance.channelsAudioType[channel-1] = audioType;
 		theInstance.channelsOccupied[channel-1] = true;
 		theInstance.channelsPaused[channel-1] = false;
 		theInstance.channels[channel-1].Play();
 	}
+	
+	public static void Mute(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+	}
+	
+	public static void Unmute(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+	}
+	
+	public static void Pause(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+	}
+	
+	public static void Stop(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+	}
+	
+	public static void SetChannelAudioClip(int channel, AudioClip soundClip)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Between 0.0f and 1.0f
+	}
+	
+	public static void SetChannelAudioType(int channel, AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Between 0.0f and 1.0f
+	}
+	
+	public static void SetChannelVolume(int channel, float volume)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Between 0.0f and 1.0f
+	}
+	
+	public static void SetChannelPitch(int channel, float pitch)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Greater than 0.0f
+	}
+	
+	public static void SetChannelLooping(int channel, float shouldChannelLoop)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		//
+	}
+	
+	public static void SetChannelPriority(int channel, int priority)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Between 0 and 255
+	}
+	
+	public static void SetChannelPan2D(int channel, float pan)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		// Between -1.0f and 1.0f
+	}
+	
+	public static void ShouldChannelIgnorePause(int channel, bool ignorePause)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		
+	}
+	
+	public static void ShouldChannelIgnoreVolume(int channel, bool ignoreVolume)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+	}
+	
+	public static bool IsChannelPaused(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		
+		return theInstance.channelsPaused[channel-1];
+	}
+	
+	public static bool IsChannelMuted(int channel)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channel) ) return;
+		
+		return theInstance.channels[channel-1].mute;
+	}
+	
 }
