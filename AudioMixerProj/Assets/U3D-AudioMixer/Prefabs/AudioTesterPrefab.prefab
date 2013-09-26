@@ -65,9 +65,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952fbeb6bcfa844eebaf9f9ff3dde57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioToPlay: {fileID: 8300000, guid: 051fb3f963ff64bb089814bb95d713b4, type: 3}
-  keyToPress: 113
-  channelToPlay: 1
+  audioToPlay: {fileID: 0}
+  keyToPress: 278
+  channelToPlay: 0
   typeOfAudio: 2
   loopChannel: 0
   channelPan: 0
