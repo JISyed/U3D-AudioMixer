@@ -161,6 +161,13 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
+	public static int GetNumberOfChannels()
+	{
+		FindAMObject();
+		
+		return NUM_OF_CHANNELS;
+	}
+	
 	public static void Play(int channel, AudioClip soundClip, AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -190,6 +197,39 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].Play();
 	}
 	
+	public static void PlayAll()
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channels[i].clip == null)
+			{
+				//Debug.Log("AudioMixer.PlayAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+				continue;
+			}
+			Play(i+1);
+		}
+	}
+	
+	public static void PlayAllOfType(AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channelsAudioType[i] == audioType)
+			{
+				if(theInstance.channels[i].clip == null)
+				{
+					//Debug.Log("AudioMixer.PlayAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+					continue;
+				}
+				Play(i+1);
+			}
+		}
+	}
+	
 	public static void Mute(int channel)
 	{
 		FindAMObject();
@@ -198,12 +238,58 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].mute = true;
 	}
 	
+	public static void MuteAll()
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			Mute(i+1);
+		}
+	}
+	
+	public static void MuteAllOfType(AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channelsAudioType[i] == audioType)
+			{
+				Mute(i+1);
+			}
+		}
+	}
+	
 	public static void Unmute(int channel)
 	{
 		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel) ) return;
 		
 		theInstance.channels[channel-1].mute = false;
+	}
+	
+	public static void UnmuteAll()
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			Unmute(i+1);
+		}
+	}
+	
+	public static void UnmuteAllOfType(AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channelsAudioType[i] == audioType)
+			{
+				Unmute(i+1);
+			}
+		}
 	}
 	
 	public static void Pause(int channel)
@@ -216,6 +302,39 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].Pause();
 	}
 	
+	public static void PauseAll()
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channels[i].clip == null)
+			{
+				//Debug.Log("AudioMixer.PauseAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+				continue;
+			}
+			Pause(i+1);
+		}
+	}
+	
+	public static void PauseAllOfType(AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channelsAudioType[i] == audioType)
+			{
+				if(theInstance.channels[i].clip == null)
+				{
+					//Debug.Log("AudioMixer.PauseAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+					continue;
+				}
+				Pause(i+1);
+			}
+		}
+	}
+	
 	public static void Stop(int channel)
 	{
 		FindAMObject();
@@ -224,6 +343,39 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channelsOccupied[channel-1] = false;
 		theInstance.channelsPaused[channel-1] = false;
 		theInstance.channels[channel-1].Stop();
+	}
+	
+	public static void StopAll()
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channels[i].clip == null)
+			{
+				//Debug.Log("AudioMixer.StopAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+				continue;
+			}
+			Stop(i+1);
+		}
+	}
+	
+	public static void StopAllOfType(AudioMixerChannelTypes audioType)
+	{
+		FindAMObject();
+		
+		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		{
+			if(theInstance.channelsAudioType[i] == audioType)
+			{
+				if(theInstance.channels[i].clip == null)
+				{
+					//Debug.Log("AudioMixer.StopAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
+					continue;
+				}
+				Stop(i+1);
+			}
+		}
 	}
 	
 	public static void SetChannelAudioClip(int channel, AudioClip soundClip)
