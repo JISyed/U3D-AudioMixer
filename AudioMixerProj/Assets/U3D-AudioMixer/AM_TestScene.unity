@@ -931,7 +931,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: b35ca98cbeabc4710aba749eb3af7834, type: 3}
   keyToPress: 114
   channelToPlay: 4
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
@@ -1626,12 +1626,12 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: 6a34bd9ae50c544f78ea6350e5e2c831, type: 3}
   keyToPress: 115
   channelToPlay: 2
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
   channelPriority: 128
-  channelVolume: 1
+  channelVolume: .239999995
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
 --- !u!23 &364035674
@@ -3446,6 +3446,10 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: 3b1f57b1ba81f40f0a4ab9a0d0ab9f4b, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 2113351507}
@@ -3757,11 +3761,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952fbeb6bcfa844eebaf9f9ff3dde57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioToPlay: {fileID: 0}
+  audioToPlay: {fileID: 8300000, guid: a97c45adf318946038a4b0eb80b41493, type: 3}
   keyToPress: 97
   channelToPlay: 1
-  typeOfAudio: 2
-  loopChannel: 0
+  typeOfAudio: 0
+  loopChannel: 1
   channelPan: 0
   channelPitch: 1
   channelPriority: 128
@@ -4884,6 +4888,18 @@ Prefab:
       propertyPath: channelToPlay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: loopChannel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: audioToPlay
+      value: 
+      objectReference: {fileID: 8300000, guid: a379f52cfb31e48598b30de4d42f85a1, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 1934606376}
@@ -5070,6 +5086,18 @@ Prefab:
       propertyPath: channelToPlay
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: loopChannel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: audioToPlay
+      value: 
+      objectReference: {fileID: 8300000, guid: a97c45adf318946038a4b0eb80b41493, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 736815634}
@@ -7067,7 +7095,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: d90d93103f0ef441c8fb0d24e118a0c9, type: 3}
   keyToPress: 102
   channelToPlay: 4
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
@@ -7715,6 +7743,14 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: 6a34bd9ae50c544f78ea6350e5e2c831, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: channelVolume
+      value: .239999995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 364035671}
@@ -9193,6 +9229,10 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: f737fa43ed17a44e3b75337ad60a904d, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 2101634071}
@@ -9542,6 +9582,10 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: b35ca98cbeabc4710aba749eb3af7834, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 214984305}
@@ -9933,11 +9977,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952fbeb6bcfa844eebaf9f9ff3dde57e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioToPlay: {fileID: 0}
+  audioToPlay: {fileID: 8300000, guid: a379f52cfb31e48598b30de4d42f85a1, type: 3}
   keyToPress: 113
   channelToPlay: 1
-  typeOfAudio: 2
-  loopChannel: 0
+  typeOfAudio: 0
+  loopChannel: 1
   channelPan: 0
   channelPitch: 1
   channelPriority: 128
@@ -10316,6 +10360,10 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: d90d93103f0ef441c8fb0d24e118a0c9, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 1448833496}
@@ -10637,6 +10685,10 @@ Prefab:
       propertyPath: audioToPlay
       value: 
       objectReference: {fileID: 8300000, guid: da94c14690bab49f4b8baf5ff6c59138, type: 3}
+    - target: {fileID: 11400000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
+      propertyPath: typeOfAudio
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9ad6482161f74eadb8480d1efa5b021, type: 2}
   m_RootGameObject: {fileID: 2094118554}
@@ -10739,7 +10791,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: da94c14690bab49f4b8baf5ff6c59138, type: 3}
   keyToPress: 119
   channelToPlay: 2
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
@@ -10818,7 +10870,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: f737fa43ed17a44e3b75337ad60a904d, type: 3}
   keyToPress: 101
   channelToPlay: 3
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
@@ -10950,7 +11002,7 @@ MonoBehaviour:
   audioToPlay: {fileID: 8300000, guid: 3b1f57b1ba81f40f0a4ab9a0d0ab9f4b, type: 3}
   keyToPress: 100
   channelToPlay: 3
-  typeOfAudio: 2
+  typeOfAudio: 1
   loopChannel: 0
   channelPan: 0
   channelPitch: 1
