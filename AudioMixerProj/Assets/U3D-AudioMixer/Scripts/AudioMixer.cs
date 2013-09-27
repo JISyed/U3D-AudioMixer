@@ -201,14 +201,14 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channels[i].clip == null)
+			if(theInstance.channels[i-1].clip == null)
 			{
 				//Debug.Log("AudioMixer.PlayAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 				continue;
 			}
-			Play(i+1);
+			Play(i);
 		}
 	}
 	
@@ -216,16 +216,16 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channelsAudioType[i] == audioType)
+			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
-				if(theInstance.channels[i].clip == null)
+				if(theInstance.channels[i-1].clip == null)
 				{
 					//Debug.Log("AudioMixer.PlayAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 					continue;
 				}
-				Play(i+1);
+				Play(i);
 			}
 		}
 	}
@@ -242,9 +242,9 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			Mute(i+1);
+			Mute(i);
 		}
 	}
 	
@@ -252,11 +252,11 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channelsAudioType[i] == audioType)
+			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
-				Mute(i+1);
+				Mute(i);
 			}
 		}
 	}
@@ -273,9 +273,9 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			Unmute(i+1);
+			Unmute(i);
 		}
 	}
 	
@@ -283,11 +283,11 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channelsAudioType[i] == audioType)
+			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
-				Unmute(i+1);
+				Unmute(i);
 			}
 		}
 	}
@@ -306,14 +306,14 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channels[i].clip == null)
+			if(theInstance.channels[i-1].clip == null)
 			{
 				//Debug.Log("AudioMixer.PauseAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 				continue;
 			}
-			Pause(i+1);
+			Pause(i);
 		}
 	}
 	
@@ -321,16 +321,16 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channelsAudioType[i] == audioType)
+			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
-				if(theInstance.channels[i].clip == null)
+				if(theInstance.channels[i-1].clip == null)
 				{
 					//Debug.Log("AudioMixer.PauseAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 					continue;
 				}
-				Pause(i+1);
+				Pause(i);
 			}
 		}
 	}
@@ -349,14 +349,14 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channels[i].clip == null)
+			if(theInstance.channels[i-1].clip == null)
 			{
 				//Debug.Log("AudioMixer.StopAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 				continue;
 			}
-			Stop(i+1);
+			Stop(i);
 		}
 	}
 	
@@ -364,16 +364,16 @@ public class AudioMixer : MonoBehaviour
 	{
 		FindAMObject();
 		
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
-			if(theInstance.channelsAudioType[i] == audioType)
+			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
-				if(theInstance.channels[i].clip == null)
+				if(theInstance.channels[i-1].clip == null)
 				{
 					//Debug.Log("AudioMixer.StopAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 					continue;
 				}
-				Stop(i+1);
+				Stop(i);
 			}
 		}
 	}
