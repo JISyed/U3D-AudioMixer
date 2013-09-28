@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary> Types of audio. Choose from Music, Jingle, Sound, and Voice. </summary>
 public enum AudioMixerChannelTypes
 {
 	Music,
@@ -161,6 +162,7 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
+	/// <summary> Returns the number of channels that AudioMixer uses. </summary>
 	public static int GetNumberOfChannels()
 	{
 		FindAMObject();
@@ -168,6 +170,10 @@ public class AudioMixer : MonoBehaviour
 		return NUM_OF_CHANNELS;
 	}
 	
+	/// <summary> Plays the given sound clip in the given channel and marks it as the given audio type. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='soundClip'> The audio file itself. Handled in Unity as an AudioClip. </param>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void Play(int channel, AudioClip soundClip, AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -181,6 +187,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].Play();
 	}
 	
+	/// <summary> Plays whatever AudioClip is assigned to the given channel. 
+	/// Call SetChannelAudioClip() if no AudioClip was assigned. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Play(int channel)
 	{
 		FindAMObject();
@@ -197,6 +206,8 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].Play();
 	}
 	
+	/// <summary> Plays audio from every channel. Will ignore channels where the AudioClip is not set. 
+	/// Use SetChannelAudioClip() to set an AudioClip to a specific channel. </summary>
 	public static void PlayAll()
 	{
 		FindAMObject();
@@ -212,6 +223,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Plays audio from every channel with the given audio type. Will ignore channels where the AudioClip is not set. </summary>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void PlayAllOfType(AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -230,6 +243,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Mutes the given channel. To stop muting, use Unmute(). </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Mute(int channel)
 	{
 		FindAMObject();
@@ -238,6 +253,7 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].mute = true;
 	}
 	
+	/// <summary> Mutes every channel. To stop muting every channel, use UnmuteAll(). </summary>
 	public static void MuteAll()
 	{
 		FindAMObject();
@@ -248,6 +264,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Mutes only the channels assigned the given audio type. To stop muting, use UnmuteAllOfType(). </summary>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void MuteAllOfType(AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -261,6 +279,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Stops muting the given channel. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Unmute(int channel)
 	{
 		FindAMObject();
@@ -269,6 +289,7 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].mute = false;
 	}
 	
+	/// <summary> Stops muting every channel. </summary>
 	public static void UnmuteAll()
 	{
 		FindAMObject();
@@ -279,6 +300,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Stops muting every channel assigned the given audio type. </summary>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void UnmuteAllOfType(AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -292,16 +315,25 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Pauses the given channel. To unpause, use Play(). </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Pause(int channel)
 	{
 		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel) ) return;
+		
+		if(theInstance.channels[channel-1].ignoreListenerPause)
+		{
+			Debug.Log("Channel " + channel.ToString() + " ignored the call to pause because it was flagged to ignore pause calls.");
+			return;
+		}
 		
 		theInstance.channelsOccupied[channel-1] = true;
 		theInstance.channelsPaused[channel-1] = true;
 		theInstance.channels[channel-1].Pause();
 	}
 	
+	/// <summary> Pauses all channels with an assigned AudioClip. To unpause all channels, use PlayAll(). </summary>
 	public static void PauseAll()
 	{
 		FindAMObject();
@@ -317,6 +349,9 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Pauses every channel assigned the given audio type. Ignores any channel without an assigned AudioClip.
+	/// To unpause all channels of the given audio type, use PlayAllOfType(). </summary>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void PauseAllOfType(AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -335,6 +370,8 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
+	/// <summary> Stops the audio playback if the given channel. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Stop(int channel)
 	{
 		FindAMObject();
@@ -345,21 +382,26 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].Stop();
 	}
 	
+	/// <summary> Stops the audio playback of all channels. </summary>
 	public static void StopAll()
 	{
 		FindAMObject();
 		
 		for(int i=1; i <= NUM_OF_CHANNELS; i++)
 		{
+			/*
 			if(theInstance.channels[i-1].clip == null)
 			{
 				//Debug.Log("AudioMixer.StopAll: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 				continue;
 			}
+			*/
 			Stop(i);
 		}
 	}
 	
+	/// <summary> Stops the audio playback in the channels assigned the given audio type. </summary>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void StopAllOfType(AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -368,16 +410,21 @@ public class AudioMixer : MonoBehaviour
 		{
 			if(theInstance.channelsAudioType[i-1] == audioType)
 			{
+				/*
 				if(theInstance.channels[i-1].clip == null)
 				{
 					//Debug.Log("AudioMixer.StopAllOfType: Channel " + (i+1).ToString() + " does not have an assigned AudioClip!");
 					continue;
 				}
+				*/
 				Stop(i);
 			}
 		}
 	}
 	
+	/// <summary> Sets the AudioClip to the given channel. This does not play a sound. To do that, use Play(). </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='soundClip'> The audio file itself. Handled in Unity as an AudioClip. </param>
 	public static void SetChannelAudioClip(int channel, AudioClip soundClip)
 	{
 		FindAMObject();
@@ -392,6 +439,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].clip = soundClip;
 	}
 	
+	/// <summary> Sets the audio type label of the channel. Useful for dedicating a channel to music, for example. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
 	public static void SetChannelAudioType(int channel, AudioMixerChannelTypes audioType)
 	{
 		FindAMObject();
@@ -400,6 +450,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channelsAudioType[channel-1] = audioType;
 	}
 	
+	/// <summary> Adjusts the volume of the given channel. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='volume'> The volume level. Should be between 0.0f and 1.0f. 1.0f is the max volume. </param>
 	public static void SetChannelVolume(int channel, float volume)
 	{
 		FindAMObject();
@@ -421,6 +474,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].volume = volume;
 	}
 	
+	/// <summary> Adjusts the pitch scale of the given channel. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='pitch'> The pitch scale. Should be greater than 0.0f. A pitch of 1.0f is the normal pitch level. </param>
 	public static void SetChannelPitch(int channel, float pitch)
 	{
 		FindAMObject();
@@ -436,6 +492,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].pitch = pitch;
 	}
 	
+	/// <summary> Flags a channel as looping playback or single playback. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='shouldChannelLoop'> The channel will loop if true, or play once if false. </param>
 	public static void SetChannelLooping(int channel, bool shouldChannelLoop)
 	{
 		FindAMObject();
@@ -444,6 +503,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].loop = shouldChannelLoop;
 	}
 	
+	/// <summary> Sets a channel's playback priority. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='priority'> The priority level. Should be between 0 and 255. 0 is highest priority. </param>
 	public static void SetChannelPriority(int channel, int priority)
 	{
 		FindAMObject();
@@ -464,6 +526,9 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].priority = priority;
 	}
 	
+	/// <summary> Sets the 2D panning of the given channel. Only works for mono or stereo audio files. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='pan'> The panning level. Should be between -1.0f and 1.0f. -1 if left, 1 if right, and 0 is centered. </param>
 	public static void SetChannelPan2D(int channel, float pan)
 	{
 		FindAMObject();
@@ -483,6 +548,11 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].pan = pan;
 	}
 	
+	/// <summary> Flags a channel whether to ignore calls to pause or not. 
+	/// Calling any pause function on this channel will be ignored if set to true. 
+	/// Refer to AudioSource.ignoreListernerPause in Unity's documentation. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='ignorePause'> The channel will ignore any calls to pause if true. </param>
 	public static void ShouldChannelIgnorePause(int channel, bool ignorePause)
 	{
 		FindAMObject();
@@ -491,6 +561,11 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].ignoreListenerPause = ignorePause;
 	}
 	
+	/// <summary> Flags a channel whether to ignore volume adjustment or not.
+    /// Calling SetChannelVolume() on the given channel will be ignored if this is set to true. 
+    /// Refer to AudioSource.ignoreListenerVolume in Unity's documentation. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	/// <param name='ignoreVolume'> The channel will ignore any volume adjustments if true. </param>
 	public static void ShouldChannelIgnoreVolume(int channel, bool ignoreVolume)
 	{
 		FindAMObject();
@@ -499,6 +574,8 @@ public class AudioMixer : MonoBehaviour
 		theInstance.channels[channel-1].ignoreListenerVolume = ignoreVolume;
 	}
 	
+	/// <summary> Returns true if the given channel is paused. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static bool IsChannelPaused(int channel)
 	{
 		FindAMObject();
@@ -507,6 +584,8 @@ public class AudioMixer : MonoBehaviour
 		return theInstance.channelsPaused[channel-1];
 	}
 	
+	/// <summary> Returns true if the given channel is muted. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static bool IsChannelMuted(int channel)
 	{
 		FindAMObject();
@@ -515,6 +594,8 @@ public class AudioMixer : MonoBehaviour
 		return theInstance.channels[channel-1].mute;
 	}
 	
+	/// <summary> Returns true if the given channel is playing a sound. Returns false if paused or stopped. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static bool IsChannelPlaying(int channel)
 	{
 		FindAMObject();
