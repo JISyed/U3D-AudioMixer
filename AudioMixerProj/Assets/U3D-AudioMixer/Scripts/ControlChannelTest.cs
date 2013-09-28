@@ -17,7 +17,7 @@ public class ControlChannelTest : MonoBehaviour
 	public bool controllAllChannels = false;
 	public int channelToControl = 0;
 	public bool controlAllAudioTypes = false;
-	public AudioMixerChannelTypes audioTypeToControl = AudioMixerChannelTypes.Sound;
+	public AudioMixerChannelTypes audioTypeToControl;
 	public KeyCode keyToPress;
 	public Material matDefault;
 	public Material matPressed;
