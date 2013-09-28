@@ -162,13 +162,6 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
-	/// <summary> Returns the number of channels that AudioMixer uses. </summary>
-	public static int GetNumberOfChannels()
-	{
-		FindAMObject();
-		
-		return NUM_OF_CHANNELS;
-	}
 	
 	/// <summary> Plays the given sound clip in the given channel and marks it as the given audio type. </summary>
 	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
@@ -370,7 +363,7 @@ public class AudioMixer : MonoBehaviour
 		}
 	}
 	
-	/// <summary> Stops the audio playback if the given channel. </summary>
+	/// <summary> Stops the audio playback of the given channel. </summary>
 	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	public static void Stop(int channel)
 	{
@@ -602,6 +595,14 @@ public class AudioMixer : MonoBehaviour
 		if(! theInstance.ChannelIsValid(channel) ) return false;
 		
 		return theInstance.channels[channel-1].isPlaying;
+	}
+	
+	/// <summary> Returns the number of channels that AudioMixer uses. </summary>
+	public static int GetNumberOfChannels()
+	{
+		FindAMObject();
+		
+		return NUM_OF_CHANNELS;
 	}
 	
 }
