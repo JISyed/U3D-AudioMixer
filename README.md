@@ -50,4 +50,4 @@ Be default, AudioMixer sets up 8 channels (which are actually [`AudioSources`](h
 
 ### Documentation
 
-Coming soon.
+For documentation, please refer to the [wiki](https://github.com/JISyed/U3D-AudioMixer/wiki).
