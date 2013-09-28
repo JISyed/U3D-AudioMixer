@@ -23,7 +23,7 @@ The functionality of the keys can be changed by clicking on a key in the scene a
 
 ### How to Use
 
-Put the [`AudioMixer.cs`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Scripts/AudioMixer.cs) script and put it somewhere in your `/Assets` folder. Then place the prefab [`AudioMixerObject.prefab`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Resources/AudioMixerObject.prefab) into a folder called `/Resources`. This folder *must* be somewhere in the `/Assets` folder, so for example: `/Assets/Resources/AudioMixerObject.prefab`. 
+Put the [`AudioMixer.cs`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Scripts/AudioMixer.cs) script somewhere in your `/Assets` folder. Then place the prefab [`AudioMixerObject.prefab`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Resources/AudioMixerObject.prefab) into a folder called `/Resources`. This folder *must* be somewhere in the `/Assets` folder, so for example: `/Assets/Resources/AudioMixerObject.prefab`. 
 
 Whenever you want to play a sound in code, you can call the AudioMixer like this:
 
