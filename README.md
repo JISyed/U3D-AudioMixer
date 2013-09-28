@@ -17,4 +17,37 @@ Channel 1 plays looping music. The rest are sound effects or jingles.
 
 The demo project requires Unity 4.2 or greater.
 
-![demoScreen](https://pbs.twimg.com/media/BVLxP0SCMAAl7KH.png)
+The functionality of the keys can be changed by clicking on a key in the scene and adjusting the inspector.
+
+![demoScreen](https://pbs.twimg.com/media/BVNV156CQAAigbq.png)
+
+### How to Use
+
+Put the [`AudioMixer.cs`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Scripts/AudioMixer.cs) script and put it somewhere in your `/Assets` folder. Then place the prefab [`AudioMixerObject.prefab`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Resources/AudioMixerObject.prefab) into a folder called `/Resources`. This folder *must* be somewhere in the `/Assets` folder, so for example: `/Assets/Resources/AudioMixerObject.prefab`. 
+
+Whenever you want to play a sound in code, you can call the AudioMixer like this:
+
+```csharp
+using UnityEngine;
+using System.Collections;
+
+public class SoundPlayerScriptExample : Monobehavior
+{
+    public AudioClip soundEffect;
+    public int audioMixerChannel = 1;
+    public AudioMixerChannelTypes audioType = AudioMixerChannelTypes.Sound;
+    
+    void Start()
+    {
+        AudioMixer.Play(audioMixerChannel, soundEffect, audioType);
+    }
+}
+```
+
+Notice that this is a static call. An instance of the AudioMixerObject prefab will be created when needed, so you don't have to.
+
+Be default, AudioMixer sets up 8 channels (which are actually [`AudioSources`](http://docs.unity3d.com/Documentation/ScriptReference/AudioSource.html)). If you would like more channels, change the constant `NUM_OF_CHANNELS`, which can be found right after AudioMixer's class declaration. Notice that changing this constant will NOT adjust anything in the demo scene.
+
+### Documentation
+
+Coming soon.
