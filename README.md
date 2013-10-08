@@ -27,6 +27,8 @@ The functionality of the keys can be changed by clicking on a key in the scene a
 
 Put the [`AudioMixer.cs`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Scripts/AudioMixer.cs) script somewhere in your `/Assets` folder. Then place the prefab [`AudioMixerObject.prefab`](https://github.com/JISyed/U3D-AudioMixer/blob/master/AudioMixerProj/Assets/U3D-AudioMixer/Resources/AudioMixerObject.prefab) into a folder called `/Resources`. This folder *must* be somewhere in the `/Assets` folder, so for example: `/Assets/Resources/AudioMixerObject.prefab`. 
 
+The next step in important if you're placing AudioMixer into a new Unity project. Go to the `AudioMixerObject` prefab and in the inspector, make sure the `AudioMixer` script is attatched. It most likely will not be attatched if you took AudioMixer assets into a new project.
+
 Whenever you want to play a sound in code, you can call the AudioMixer like this:
 
 ```csharp
