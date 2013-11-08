@@ -20,22 +20,30 @@ public class AudioMixer : MonoBehaviour
 	private AudioMixerChannelTypes[] channelsAudioType;
 	private static AudioMixer theInstance;
 	private static bool instanceFound = false;
+	private static bool alreadyRanStart = false;
 	
 	// Initilizer
 	void Start () 
 	{
-		// Create the audio channels
-		channels = new AudioSource[NUM_OF_CHANNELS];
-		channelsOccupied = new bool[NUM_OF_CHANNELS];
-		channelsPaused = new bool[NUM_OF_CHANNELS];
-		channelsAudioType = new AudioMixerChannelTypes[NUM_OF_CHANNELS];
-		for(int i=0; i<NUM_OF_CHANNELS; i++)
+		if(!alreadyRanStart)
 		{
-			channels[i] = gameObject.AddComponent<AudioSource>();
-			channels[i].playOnAwake = false;
-			channelsOccupied[i] = false;
-			channelsPaused[i] = false;
-			channelsAudioType[i] = AudioMixerChannelTypes.Sound;
+			alreadyRanStart = true;
+			
+			DontDestroyOnLoad(this.gameObject);
+			
+			// Create the audio channels
+			channels = new AudioSource[NUM_OF_CHANNELS];
+			channelsOccupied = new bool[NUM_OF_CHANNELS];
+			channelsPaused = new bool[NUM_OF_CHANNELS];
+			channelsAudioType = new AudioMixerChannelTypes[NUM_OF_CHANNELS];
+			for(int i=0; i<NUM_OF_CHANNELS; i++)
+			{
+				channels[i] = gameObject.AddComponent<AudioSource>();
+				channels[i].playOnAwake = false;
+				channelsOccupied[i] = false;
+				channelsPaused[i] = false;
+				channelsAudioType[i] = AudioMixerChannelTypes.Sound;
+			}
 		}
 	}
 	
@@ -61,6 +69,7 @@ public class AudioMixer : MonoBehaviour
 		// Unassign the instance
 		theInstance = null;
 		instanceFound = false;
+		alreadyRanStart = false;
 		
 		// Destroy the channels
 		for(int i=0; i<NUM_OF_CHANNELS; i++)
@@ -109,8 +118,8 @@ public class AudioMixer : MonoBehaviour
 			else
 			{
 				//Debug.Log("Mixer Found!");
+				mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
 			}
-			mixerComponent = foundMixerObject.GetComponent<AudioMixer>();
 			AudioMixer.theInstance = mixerComponent;
 			instanceFound = true;
 		}
@@ -188,11 +197,13 @@ public class AudioMixer : MonoBehaviour
 		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel) ) return;
 		
+		
 		if(theInstance.channels[channel-1].clip == null)
 		{
 			Debug.LogError("AudioMixer.Play: Given channel does not have a AudioClip set. Use SetChannelAudioClip() first.");
 			return;
 		}
+		
 		
 		theInstance.channelsOccupied[channel-1] = true;
 		theInstance.channelsPaused[channel-1] = false;
