@@ -319,8 +319,8 @@ MonoBehaviour:
   audioControl: 4
   controllAllChannels: 1
   channelToControl: 1
-  controlAllAudioTypes: 0
-  audioTypeToControl: 0
+  controlAllAudioTypes: 1
+  audioTypeToControl: 1
   keyToPress: 53
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
@@ -3298,11 +3298,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioTypeToControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: controlAllAudioTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioControl
@@ -4929,8 +4929,8 @@ MonoBehaviour:
   audioControl: 3
   controllAllChannels: 1
   channelToControl: 1
-  controlAllAudioTypes: 0
-  audioTypeToControl: 0
+  controlAllAudioTypes: 1
+  audioTypeToControl: 1
   keyToPress: 52
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
@@ -8467,11 +8467,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioTypeToControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: controlAllAudioTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioControl
@@ -8941,11 +8941,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioTypeToControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: controlAllAudioTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioControl
@@ -8989,8 +8989,8 @@ MonoBehaviour:
   audioControl: 2
   controllAllChannels: 1
   channelToControl: 1
-  controlAllAudioTypes: 0
-  audioTypeToControl: 0
+  controlAllAudioTypes: 1
+  audioTypeToControl: 1
   keyToPress: 51
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
@@ -11915,8 +11915,8 @@ MonoBehaviour:
   audioControl: 1
   controllAllChannels: 1
   channelToControl: 1
-  controlAllAudioTypes: 0
-  audioTypeToControl: 0
+  controlAllAudioTypes: 1
+  audioTypeToControl: 1
   keyToPress: 50
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
@@ -12060,11 +12060,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioTypeToControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: controlAllAudioTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioControl
@@ -12108,8 +12108,8 @@ MonoBehaviour:
   audioControl: 0
   controllAllChannels: 1
   channelToControl: 1
-  controlAllAudioTypes: 0
-  audioTypeToControl: 0
+  controlAllAudioTypes: 1
+  audioTypeToControl: 1
   keyToPress: 49
   matDefault: {fileID: 2100000, guid: 5710bb563c7db408f810a05ca6d3bad5, type: 2}
   matPressed: {fileID: 2100000, guid: 0ce9676189c464b88975189c78f40a59, type: 2}
@@ -15492,11 +15492,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioTypeToControl
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: controlAllAudioTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: a977063ef9151466bb6a25ec97e785cb, type: 2}
       propertyPath: audioControl

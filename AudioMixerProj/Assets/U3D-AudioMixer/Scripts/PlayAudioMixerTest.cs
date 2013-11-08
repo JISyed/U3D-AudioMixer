@@ -41,7 +41,10 @@ public class PlayAudioMixerTest : MonoBehaviour
 				Debug.LogWarning("Test Key " + keyToPress.ToString() + " does not have an assigned AudioClip.");
 			}
 			
-			AudioMixer.Play(channelToPlay, audioToPlay, typeOfAudio);
+			//AudioMixer.Play(channelToPlay, audioToPlay, typeOfAudio);
+			AudioMixer.SetChannelAudioClip(channelToPlay, audioToPlay);
+			AudioMixer.SetChannelAudioType(channelToPlay, typeOfAudio);
+			AudioMixer.Play(channelToPlay);
 			renderer.material = matPressed;
 		}
 		
