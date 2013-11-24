@@ -181,6 +181,11 @@ public class AudioMixer : MonoBehaviour
 		FindAMObject();
 		if(! theInstance.ChannelIsValid(channel) ) return;
 		
+		if(soundClip == null)
+		{
+			Debug.LogWarning("AudioMixer.Play: Specified AudioClip is null. Check if it's assigned somewhere.");
+		}
+		
 		theInstance.channels[channel-1].clip = soundClip;
 		theInstance.channelsAudioType[channel-1] = audioType;
 		
