@@ -171,7 +171,25 @@ public class AudioMixer : MonoBehaviour
 	
 	// ------- Audio calls ------------
 	
-	
+
+	/// <summary> Plays the given sound clip on any channel and marks it as the given audio type. </summary>
+	/// <param name='soundClip'> The audio file itself. Handled in Unity as an AudioClip. </param>
+	/// <param name='audioType'> Used to label the audio to a specific type. Choose from Sound, Music, Jungle, and Voice. </param>
+	public static void Play(AudioClip soundClip, AudioMixerChannelTypes audioType)
+	{
+		// Find avaliable channel
+		int avaliableChannel = AudioMixer.FindFirstAvaliableChannel();
+
+		if(avaliableChannel <= 0)
+		{
+			Debug.LogError("AudioMixer: Finding Avaliable Channel returned an invalid index.");
+			return;
+		}
+
+		// Play in avaliable channel
+		AudioMixer.Play(avaliableChannel, soundClip, audioType);
+	}
+
 	/// <summary> Plays the given sound clip in the given channel and marks it as the given audio type. </summary>
 	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
 	/// <param name='soundClip'> The audio file itself. Handled in Unity as an AudioClip. </param>
