@@ -17,6 +17,7 @@ public class AudioMixer : MonoBehaviour
 	private AudioSource[] channels;
 	private bool[] channelsOccupied;
 	private bool[] channelsPaused;
+	private bool[] channelsReserved;
 	private AudioMixerChannelTypes[] channelsAudioType;
 	private static AudioMixer theInstance;
 	private static bool instanceFound = false;
@@ -35,13 +36,16 @@ public class AudioMixer : MonoBehaviour
 			channels = new AudioSource[NUM_OF_CHANNELS];
 			channelsOccupied = new bool[NUM_OF_CHANNELS];
 			channelsPaused = new bool[NUM_OF_CHANNELS];
+			channelsReserved = new bool[NUM_OF_CHANNELS];
 			channelsAudioType = new AudioMixerChannelTypes[NUM_OF_CHANNELS];
+
 			for(int i=0; i<NUM_OF_CHANNELS; i++)
 			{
 				channels[i] = gameObject.AddComponent<AudioSource>();
 				channels[i].playOnAwake = false;
 				channelsOccupied[i] = false;
 				channelsPaused[i] = false;
+				channelsReserved[i] = false;
 				channelsAudioType[i] = AudioMixerChannelTypes.Sound;
 			}
 		}
@@ -139,7 +143,7 @@ public class AudioMixer : MonoBehaviour
 		// Find an empty channel to play
 		for(int i=0; i<NUM_OF_CHANNELS; i++)
 		{
-			if(!theInstance.channelsOccupied[i])
+			if(!theInstance.channelsOccupied[i] && !theInstance.channelsReserved[i])
 			{
 				avaliableChannel = i;
 				channelFound = true;
@@ -170,7 +174,16 @@ public class AudioMixer : MonoBehaviour
 	}
 	
 	// ------- Audio calls ------------
-	
+
+	/// <summary> Reserve the speficied channel for manual channel playing. </summary>
+	/// <param name='channel'> The AudioMixer channel. Should be a number between 1 and NUM_OF_CHANNELS </param>
+	public static void ReserveChannel(int channelToReserve)
+	{
+		FindAMObject();
+		if(! theInstance.ChannelIsValid(channelToReserve) ) return;
+
+		theInstance.channelsReserved[channelToReserve-1] = true;
+	}
 
 	/// <summary> Plays the given sound clip on any channel and marks it as the given audio type. </summary>
 	/// <param name='soundClip'> The audio file itself. Handled in Unity as an AudioClip. </param>
