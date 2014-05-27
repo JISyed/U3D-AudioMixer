@@ -1,6 +1,8 @@
 U3D-AudioMixer
 ==============
 
+**Notice: AudioMixer will probably be obsolete by the time Unity 5 gets released. This was meant for Unity 4.**
+
 AudioMixer is a Unity script written in C# that attempts to implement an audio mixer with channels. In Unity, the most typical way to control audio was though priorities, which could be set in a sound's properties. There was never a built-in system to relay audio to a specific channel.
 
 AudioMixer implements audio channeling via a script with the same name that is attached to a GameObject. Entities in your game that need to play a sound (or music) can call AudioMixer to play a sound in a specified channel of your choice. Notice that this is not a Unity extension and thus does **not** make audio channels a built-in feature in Unity.
